@@ -1,7 +1,7 @@
 'use client'
 
 import { useUser } from "@clerk/nextjs"
-import { Box, Button, Card, CardActionArea, CardContent, Container, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Paper, TextField, Typography } from "@mui/material"
+import { Box, Button, Card, CardActionArea, CardContent, Container, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Paper, TextField, Typography, Grid } from "@mui/material"  // Added Grid import
 import { collection, doc, getDoc, writeBatch, setDoc } from "firebase/firestore"
 import { useRouter } from 'next/navigation';
 import { useState } from "react"
@@ -95,7 +95,7 @@ export default function Generate(){
                 </Paper>
             </Box>
 
-            {flashcards > 0 && (
+            {flashcards.length > 0 && ( // Fixed the comparison
                 <Box sx={{mt:4}}>
                     <Typography variant="h5">FlashCard preview</Typography>
                     <Grid container spacing={3}>
@@ -160,7 +160,7 @@ export default function Generate(){
                 <DialogTitle>Save flashcards</DialogTitle>
                 <DialogContent>
                     <DialogContentText>
-                        Please enter a name for your flashcard's collection
+                        Please enter a name for your flashcard&apos;s collection {/* Fixed unescaped apostrophe */}
                     </DialogContentText>
                     <TextField autoFocus
                     margin="dense"
@@ -178,6 +178,3 @@ export default function Generate(){
             </Dialog>
         </Container>
     }
-
-
-
